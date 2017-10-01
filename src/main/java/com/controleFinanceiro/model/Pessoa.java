@@ -8,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -61,7 +63,11 @@ public class Pessoa {
 		this.endereco = endereco;
 	}
 	
-	
+	@JsonIgnore //Ignora essa propriedade quando for fazer o parse do json
+	@Transactional //Indica para o hibernate ignorar essa propriedade
+	public boolean isPessoaInativo() {
+		return !this.ativo;
+	}
 	
 
 }

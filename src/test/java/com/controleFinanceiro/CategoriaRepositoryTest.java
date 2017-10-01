@@ -12,22 +12,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.controleFinanceiro.model.Categoria;
 import com.controleFinanceiro.repository.CategoriaRepository;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
+//@RunWith(SpringRunner.class)
+//@DataJpaTest
 public class CategoriaRepositoryTest {
 
-	@Autowired
-	private TestEntityManager testEntityManager;
+//	@Autowired
+//	private TestEntityManager testEntityManager;
 	
-	@Autowired
-	private CategoriaRepository categoriaRepository;
+//	@Autowired
+//	private CategoriaRepository categoriaRepository;
 	
-	@Test
+//	@Test
 	public void testaAlgo() {
 		
-		this.testEntityManager.persist(new Categoria("Teste"));
-		List<Categoria> categoria = this.categoriaRepository.findAll();
-		System.out.println(categoria.get(0).getNome());
+//		this.testEntityManager.persist(new Categoria("Teste"));
+//		List<Categoria> categoria = this.categoriaRepository.findAll();
+//		System.out.println(categoria.get(0).getNome());
 		
 	}
 	
