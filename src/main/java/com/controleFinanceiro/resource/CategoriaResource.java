@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.controleFinanceiro.evento.RecursoCriadoEvento;
 import com.controleFinanceiro.model.Categoria;
 import com.controleFinanceiro.repository.CategoriaRepository;
+import com.controleFinanceiro.service.CategoriaService;
 
 @RestController //Diz que é um controlador rest
 @RequestMapping("/categoria")
@@ -31,12 +34,22 @@ public class CategoriaResource {
 	private CategoriaRepository categoriaRepository;
 	
 	@Autowired
+	private CategoriaService categoriaService;
+	
+	@Autowired
 	private ApplicationEventPublisher publicador;	
 
 	@GetMapping("/listarEntidade") //Mapeamento do GET para esse método
 	public List<Categoria> listarEntidade(){
 		
 		return categoriaRepository.findAll();
+		
+	}
+	
+	@GetMapping("/buscaCateriaFiltro")
+	public Page<Categoria> buscaCategoriaPorFiltro(Categoria categoria, Pageable pageable){
+		
+		return categoriaService.buscaCategoriaPorFiltro(categoria, pageable);
 		
 	}
 	
