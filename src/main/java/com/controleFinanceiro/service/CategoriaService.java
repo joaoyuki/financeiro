@@ -1,6 +1,7 @@
 package com.controleFinanceiro.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -36,17 +37,39 @@ public class CategoriaService {
 		//ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("nome", GenericPropertyMatchers.contains());
 		//Example<Categoria> example = Example.of(categoria, matcher);
 		
+		HashMap<String, Object> paramentros = new HashMap<>();
+		boolean temWhere = false;
+		
         int paginaAtual = pageable.getPageNumber();
         int totalRegistrosPorPagina = pageable.getPageSize();
         int primeiroRegistro = paginaAtual * totalRegistrosPorPagina;
-        
+		
         StringBuilder sb = new StringBuilder();
         
         sb.append(" select categoria from com.controleFinanceiro.model.Categoria categoria ");
-        adicionaOrdenacao(sb, pageable);
+        if (null != categoria.getCodigo() || (null != categoria.getNome() && !categoria.getNome().isEmpty())){
+        	sb.append(" where ");
+        }
+        
+        if (null != categoria.getCodigo()){
+        	sb.append(" categoria.codigo = :codigo");
+        	paramentros.put("codigo", categoria.getCodigo());
+        	temWhere = true;
+        }
+        
+        if (null != categoria.getNome() && !categoria.getNome().isEmpty()){
+        	if (temWhere == true){
+        		sb.append(" and ");
+        	}
+        	sb.append(" categoria.nome like :nome");
+        	paramentros.put("nome", "%" + categoria.getNome() + "%");
+        }
+        
         Query query = this.em.createQuery(sb.toString());
+        paramentros.forEach((chave,valor) -> query.setParameter(chave, valor));
         query.setFirstResult(primeiroRegistro);
         query.setMaxResults(totalRegistrosPorPagina); 
+        adicionaOrdenacao(sb, pageable);
 		List<Categoria> lista = query.getResultList();
 		
 		return new PageImpl<>(lista, pageable, 5);
