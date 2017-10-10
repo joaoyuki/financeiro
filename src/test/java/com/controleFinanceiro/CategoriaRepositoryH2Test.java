@@ -306,7 +306,7 @@ public class CategoriaRepositoryH2Test {
 	}	
 	
 	@Test
-	public void deveriaTerCategoria(){
+	public void deveriaTerCategoriaSemFiltro(){
 		
 		Categoria categoria = new Categoria();
 		
