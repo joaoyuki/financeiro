@@ -304,6 +304,17 @@ public class CategoriaRepositoryH2Test {
 		assertTrue(categorias.get(0).getNome().equals("Lazer"));
 		
 	}	
+	
+	@Test
+	public void deveriaTerCategoria(){
+		
+		Categoria categoria = new Categoria();
+		
+		List<Categoria> categorias = buscaCategoriaPorFiltro(categoria);
+		
+		assertTrue(categorias.size() > 0);
+		
+	}		
 		
 	
 
