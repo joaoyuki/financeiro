@@ -1,5 +1,6 @@
 package com.controleFinanceiro.model;
 
+import com.controleFinanceiro.model.converter.BooleanToStringConverter;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Convert;
 
 @Entity
 @Table(name = "pessoa")
@@ -24,6 +26,8 @@ public class Pessoa {
 	
 	@NotNull
 	private String nome;
+        
+        @Convert(converter = BooleanToStringConverter.class)
 	private boolean ativo;
 	
 	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -68,6 +72,22 @@ public class Pessoa {
 	public boolean isPessoaInativo() {
 		return !this.ativo;
 	}
-	
 
+        public Pessoa(Long codigo, String nome, boolean ativo, Endereco endereco) {
+            this.codigo = codigo;
+            this.nome = nome;
+            this.ativo = ativo;
+            this.endereco = endereco;
+        }
+        
+        public Pessoa(){
+            
+        }
+	
+        public Pessoa(String nome, boolean ativo, Endereco endereco) {
+            this.nome = nome;
+            this.ativo = ativo;
+            this.endereco = endereco;
+        }
+        
 }

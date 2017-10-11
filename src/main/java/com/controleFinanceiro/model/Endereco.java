@@ -100,7 +100,32 @@ public class Endereco implements Serializable{
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
+        public Endereco(Long codigo, boolean ativo, String logradouro, String numero, String complemento, String bairro, String cep, String cidade, String estado) {
+            this.codigo = codigo;
+            this.ativo = ativo;
+            this.logradouro = logradouro;
+            this.numero = numero;
+            this.complemento = complemento;
+            this.bairro = bairro;
+            this.cep = cep;
+            this.cidade = cidade;
+            this.estado = estado;
+        }
+        
+        public Endereco(boolean ativo, String logradouro, String numero, String complemento, String bairro, String cep, String cidade, String estado) {
+            this.ativo = ativo;
+            this.logradouro = logradouro;
+            this.numero = numero;
+            this.complemento = complemento;
+            this.bairro = bairro;
+            this.cep = cep;
+            this.cidade = cidade;
+            this.estado = estado;
+        }        
 	
-	
+	public Endereco(){
+            
+        }
 
 }
