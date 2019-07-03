@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ import com.controleFinanceiro.service.CategoriaService;
 
 @RestController //Diz que é um controlador rest
 @RequestMapping("/categoria")
+//@CrossOrigin //Permite que todos os métodos dessa classe possam ser acessados por outros servidores
 public class CategoriaResource {
 	
 	@Autowired
@@ -39,6 +41,7 @@ public class CategoriaResource {
 	@Autowired
 	private ApplicationEventPublisher publicador;	
 
+	//@CrossOrigin //Permite que todas as origens podem chamar esse método	
 	@GetMapping("/listarEntidade") //Mapeamento do GET para esse método
 	public List<Categoria> listarEntidade(){
 		
